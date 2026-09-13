@@ -1,0 +1,76 @@
+/*
+  PocketLab design tokens.
+  Raw values live here as plain CSS custom properties so theme switching
+  (light / dark / system) is a runtime class swap on <html>, not a rebuild.
+  Tailwind utility names are mapped to these in tailwind.css via @theme.
+*/
+
+:root {
+  /* ---- Palette: "lab notebook" — cool paper, ink, deep teal accent ---- */
+  --paper: #F5F6F3;       /* app background */
+  --surface: #FFFFFF;     /* raised surfaces: sheets, dialogs, top bar */
+  --surface-sunken: #EEF0EC; /* recessed areas: input fields, chips */
+  --line: #DDE1DA;        /* borders, dividers */
+  --line-strong: #C4C9BF;
+
+  --ink: #14181A;         /* primary text */
+  --ink-soft: #565F5C;    /* secondary text */
+  --ink-faint: #8A928D;   /* placeholder / disabled */
+
+  --accent: #2F6F66;      /* primary actions, active states */
+  --accent-strong: #1F4F49;
+  --accent-soft: #DDEBE8; /* accent tint background */
+
+  --amber: #B9812C;       /* medium priority / upcoming */
+  --amber-soft: #F3E7D2;
+  --rust: #A94A3D;        /* overdue / destructive */
+  --rust-soft: #F3DFDB;
+  --moss: #4B7A4E;        /* completed / success */
+  --moss-soft: #DEEBDD;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  --shadow-card: 0 1px 2px rgba(20, 24, 26, 0.04), 0 4px 12px rgba(20, 24, 26, 0.06);
+  --shadow-sheet: 0 -4px 24px rgba(20, 24, 26, 0.12);
+
+  --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+}
+
+.dark {
+  --paper: #12151A;
+  --surface: #191D22;
+  --surface-sunken: #1F242A;
+  --line: #2A3038;
+  --line-strong: #3A414B;
+
+  --ink: #ECEEEA;
+  --ink-soft: #ABB2AD;
+  --ink-faint: #6E7671;
+
+  --accent: #6FC7B8;
+  --accent-strong: #8FDACC;
+  --accent-soft: #1E3733;
+
+  --amber: #E0AE5F;
+  --amber-soft: #3A2F1C;
+  --rust: #E28477;
+  --rust-soft: #3B221E;
+  --moss: #86C08A;
+  --moss-soft: #1F3320;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-sheet: 0 -4px 24px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
