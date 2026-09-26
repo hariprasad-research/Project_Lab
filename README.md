@@ -1,151 +1,125 @@
-Project Lab — PocketLab
+# Project Lab — PocketLab
 
 A local-first personal workspace for projects, tasks, ideas, notes, and research.
 
-Capture an idea → organize it → work on it → track progress → preserve knowledge
+**Capture an idea → organize it → work on it → track progress → preserve knowledge**
 
 Everything is stored on your device. No account or network connection is required.
 
-📱 About the Project
+---
 
-PocketLab is a mobile-first web app designed to run in Spck or any Node.js environment during development.
+## 📱 About the Project
 
-Once the web app is stable, it can be packaged as an Android APK using Capacitor.
+**PocketLab** is a **mobile-first web app** designed to run in Spck or any Node.js environment during development.
 
-🚧 Status
+Once the web app is stable, it can be packaged as an Android APK using **Capacitor**.
 
-Phase 2 of the build plan
+---
+
+## 🚧 Status
+
+**Phase 2 of the build plan**
 
 This phase delivers a fully working vertical slice rather than a mockup. The available screens are connected to a real local database.
 
-Dashboard
+### Dashboard
 
-Greeting
+- Greeting
+- Live statistics
+- Today's focus list
+- Tap-to-complete tasks
+- Active projects
+- Project progress bars
+- Quick actions
 
-Live statistics
+### Projects
 
-Today's focus list
+- Full CRUD operations
+- Status and priority
+- Progress automatically calculated from task completion
+- Archive / soft-delete
+- Permanent delete
+- Linked-item count before deletion
+- Confirmation dialogs
+- Tabbed detail view: Overview / Tasks
 
-Tap-to-complete tasks
-
-Active projects
-
-Project progress bars
-
-Quick actions
-
-Projects
-
-Full CRUD operations
-
-Status and priority
-
-Progress automatically calculated from task completion
-
-Archive / soft-delete
-
-Permanent delete
-
-Linked-item count before deletion
-
-Confirmation dialogs
-
-Tabbed detail view: Overview / Tasks
-
-Tasks
+### Tasks
 
 Available views:
 
-Today
-
-Upcoming
-
-Overdue
-
-Completed
-
-All
+- Today
+- Upcoming
+- Overdue
+- Completed
+- All
 
 Features:
 
-Complete / reopen tasks
+- Complete / reopen tasks
+- Delete tasks
+- Priority badges
+- Due-date labels
 
-Delete tasks
-
-Priority badges
-
-Due-date labels
-
-Search
+### Search
 
 Live keyword search across:
 
-Projects
+- Projects
+- Tasks
+- Ideas
+- Notes
+- Research
 
-Tasks
+### Settings
 
-Ideas
+- Light / Dark / System theme
+- Persisted theme preference
+- Export backup as JSON
+- Import backup
+- Backup preview
+- Merge or Replace import options
+- Clear all data
+- Confirmation dialogs for destructive actions
 
-Notes
+### Quick Capture
 
-Research
+A floating `+` button opens a bottom sheet for quickly creating:
 
-Settings
+- Tasks
+- Projects
 
-Light / Dark / System theme
-
-Persisted theme preference
-
-Export backup as JSON
-
-Import backup
-
-Backup preview
-
-Merge or Replace import options
-
-Clear all data
-
-Confirmation dialogs for destructive actions
-
-Quick Capture
-
-A floating + button opens a bottom sheet for quickly creating:
-
-Tasks
-
-Projects
-
-Upcoming Features
+### Upcoming Features
 
 The following sections are already reachable from navigation and currently show a clear placeholder:
 
-Ideas
-
-Notes
-
-Research
-
-Goals
-
-Calendar
-
-Activity
+- Ideas
+- Notes
+- Research
+- Goals
+- Calendar
+- Activity
 
 These will be implemented in upcoming phases.
 
-💾 Offline-First Architecture
+---
+
+## 💾 Offline-First Architecture
 
 PocketLab is designed to work completely offline.
 
+```text
 IndexedDB
     ↓
 Dexie
+```
 
 Data survives page refreshes, browser restarts, and offline usage.
 
-🛠️ Tech Stack
+---
 
+## 🛠️ Tech Stack
+
+```text
 React 19
 TypeScript
 Vite
@@ -157,33 +131,49 @@ React Router
 Framer Motion
 Lucide Icons
 Vitest
+```
 
-🚀 Getting Started
+---
+
+## 🚀 Getting Started
 
 Install dependencies:
 
+```bash
 npm install
+```
 
 Start the development server:
 
+```bash
 npm run dev
+```
 
 Build the production version:
 
+```bash
 npm run build
+```
 
 Run tests:
 
+```bash
 npm run test
+```
 
 Preview the production build:
 
+```bash
 npm run preview
+```
 
-The current test suite contains 20 tests covering the database layer, project/task services, and backup/restore functionality.
+The current test suite contains **20 tests** covering the database layer, project/task services, and backup/restore functionality.
 
-📂 Project Structure
+---
 
+## 📂 Project Structure
+
+```text
 src/
 ├── app/            # Root App component + router
 ├── layouts/        # MobileShell (bottom nav + FAB wrapper)
@@ -200,13 +190,17 @@ src/
 ├── types/          # Domain TypeScript types
 ├── constants/      # Status/priority enums and labels
 └── utils/          # ID generation and date helpers
+```
 
-See PocketLab_Architecture_Plan.md for the full architectural rationale, database schema, and phase plan.
+See `PocketLab_Architecture_Plan.md` for the full architectural rationale, database schema, and phase plan.
 
-🏗️ Architecture Principles
+---
 
-Service Layer
+## 🏗️ Architecture Principles
 
+### Service Layer
+
+```text
 UI
  ↓
 Features / Pages
@@ -216,77 +210,83 @@ Services
 Dexie
  ↓
 IndexedDB
+```
 
 The service layer is the only layer that directly communicates with Dexie.
 
-State Management
+### State Management
 
-Zustand is used for UI state only, including:
+Zustand is used for **UI state only**, including:
 
-Theme
-
-Toasts
-
-Modals
+- Theme
+- Toasts
+- Modals
 
 Domain data lives in Dexie.
 
-Validation
+### Validation
 
 Zod schemas are shared between forms, service writes, and backup imports.
 
-🔐 Data Safety
+---
 
-Validated Writes
+## 🔐 Data Safety
 
-Every write is validated with Zod before reaching the database.
+### Validated Writes
 
-Project Deletion
+Every write is validated with **Zod** before reaching the database.
 
-Deleting a project does not automatically delete its tasks or notes.
+### Project Deletion
 
+Deleting a project does **not** automatically delete its tasks or notes.
+
+```text
 Delete Project
       ↓
 Linked tasks / notes become unlinked
       ↓
 Records remain available
+```
 
 The application shows the linked-item count before confirmation.
 
-Backup Import
+### Backup Import
 
 Imported backups are:
 
-Validated
+1. Validated
+2. Previewed
+3. Shown with record counts
+4. Confirmed by the user
+5. Applied using the selected strategy
 
-Previewed
+#### Merge
 
-Shown with record counts
-
-Confirmed by the user
-
-Applied using the selected strategy
-
-Merge
-
+```text
 Existing data + Backup data
           ↓
 Newest edit wins per record
+```
 
-Replace
+#### Replace
 
+```text
 Existing data
       ↓
 Wipe
       ↓
 Install backup
+```
 
 Nothing is silently overwritten.
 
-🔬 Development Approach
+---
+
+## 🔬 Development Approach
 
 PocketLab is being developed as a practical vertical slice rather than a static UI mockup.
 
+```text
 Plan
  ↓
 Design
@@ -300,37 +300,33 @@ Validate
 Test
  ↓
 Improve
+```
 
-📈 Phase Progress
+---
 
-Phase 1
+## 📈 Phase Progress
+
+### Phase 1
 
 Foundation and architecture.
 
-Phase 2 — Current
+### Phase 2 — Current
 
 Core vertical slice:
 
-Dashboard
+- Dashboard
+- Projects
+- Tasks
+- Search
+- Settings
+- Quick Capture
+- Local database
+- Backup / restore
+- Testing
 
-Projects
+### Next Phases
 
-Tasks
-
-Search
-
-Settings
-
-Quick Capture
-
-Local database
-
-Backup / restore
-
-Testing
-
-Next Phases
-
+```text
 Ideas
   ↓
 Convert Idea to Project
@@ -354,11 +350,15 @@ PWA / Offline Polish
 Accessibility
   ↓
 Performance Improvements
+```
 
-🎯 Project Goal
+---
+
+## 🎯 Project Goal
 
 PocketLab aims to create a reliable personal workspace where information moves through a simple lifecycle:
 
+```text
 Capture
    ↓
 Organize
@@ -370,53 +370,40 @@ Track
 Learn
    ↓
 Preserve
+```
 
 The application focuses on local ownership of personal data, simplicity, reliability, and offline availability.
 
-📦 Future Android App
+---
+
+## 📦 Future Android App
 
 Once the web application is stable:
 
+```text
 PocketLab Web App
        ↓
 Capacitor
        ↓
 Android APK
+```
 
-👨‍💻 Project Lab
+---
 
-Property
+## 👨‍💻 Project Lab
 
-Details
+| Property | Details |
+|---|---|
+| Project | PocketLab |
+| Type | Mobile-first local-first productivity workspace |
+| Current Phase | Phase 2 |
+| Platform | Web → Android |
+| Database | IndexedDB via Dexie |
+| Validation | Zod |
+| Testing | Vitest |
 
-Project
+---
 
-PocketLab
+## 📌 Project Status
 
-Type
-
-Mobile-first local-first productivity workspace
-
-Current Phase
-
-Phase 2
-
-Platform
-
-Web → Android
-
-Database
-
-IndexedDB via Dexie
-
-Validation
-
-Zod
-
-Testing
-
-Vitest
-
-📌 Project Status
-
-Phase 2 — Core vertical slice completed and ready for the next development phase.
+> **Phase 2 — Core vertical slice completed and ready for the next development phase.**
